@@ -11,16 +11,16 @@ resource "aws_instance" "test_server" {
      host = self.public_ip
 }
 
-provisinor "remote-exec" {
+provisioner "remote-exec" {
     inline = ["echo 'wait to start the instance'"]
 }
 tags = {
     name = "test-server"
 }
-provisinor "local-exec" {
+provisioner "local-exec" {
     command = "echo ${aws_instance.test-server.public_ip} > inventory "
 }
-provisinor "local-exec" {
+provisioner "local-exec" {
     command = "ansible-playbook /var/lib/jenkins/workspace/financeME/serverfiles/finance-playbook.yml"
     }
 }
