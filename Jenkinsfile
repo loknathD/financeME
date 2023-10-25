@@ -34,6 +34,15 @@ pipeline {
                 sh 'docker push loknathdas/financeme-v1:1.0'
             }
         }
-      } 
-
-     } 
+        stage('configure server with terraform') {
+          steps {
+             dir('serverfiles') {
+             sh 'sudo chmod 600 finance.pem'
+             sh 'terraform init'
+             sh 'terraform validate'
+             sh 'terraform apply --auto-approve'
+                }
+             }
+           }
+         } 
+       } 
