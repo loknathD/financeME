@@ -18,7 +18,7 @@ tags = {
     name = "test-server"
 }
 provisinor "local-exec" {
-    inline = "echo ${aws_instance.test-server.public_ip} > inventory "
+    command = "echo ${aws_instance.test-server.public_ip} > inventory "
 }
 provisinor "local-exec" {
     command = "ansible-playbook /var/lib/jenkins/workspace/financeME/serverfiles/finance-playbook.yml"
